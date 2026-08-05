@@ -66,6 +66,7 @@ static async Task<Results<Ok<AccountDTO>, BadRequest>> addBalance(AccountDb db, 
     });
 }
 
+//PLACEHOLDER FOR DEVELOPMENT
 static async Task<Created<Account>> addAccount(AccountDb db, AddAccountDTO addAccountDTO)
 {
     Account account = new Account() { user_id = addAccountDTO.user_id };

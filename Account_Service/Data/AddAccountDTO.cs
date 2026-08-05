@@ -1,4 +1,4 @@
-﻿namespace Account_Service.Data.Models
+﻿namespace Account_Service.Data
 {
     public class AddAccountDTO
     {
