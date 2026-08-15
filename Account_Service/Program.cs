@@ -40,8 +40,8 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.MapGet("/{uid}", getUserAccounts);
-app.MapPost("/{id}", addBalance);
+app.MapGet("/getaccounts/{uid}", getUserAccounts);
+app.MapPost("/addbalance/{id}", addBalance);
 app.MapPost("/addAccount", addAccount);
 
 app.Run();
