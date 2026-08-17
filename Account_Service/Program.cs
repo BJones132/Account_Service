@@ -41,6 +41,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.MapGet("/getAccounts/{uid}", getUserAccounts);
+app.MapGet("/getBalance/{id}", getAccountBalance);
 app.MapPost("/addBalance/{id}", addBalance);
 app.MapPost("/addAccount", addAccount);
 
@@ -49,6 +50,18 @@ app.Run();
 static async Task<Ok<List<Account>>> getUserAccounts(AccountDb db, int uid)
 {
     return TypedResults.Ok(await db.Accounts.Where(a => a.user_id == uid).OrderBy(a => a.id).ToListAsync());
+}
+
+static async Task<Results<Ok<AccountDTO>, BadRequest>> getAccountBalance(AccountDb db, int id){
+    var account = await db.Accounts.Where(a => a.id == id).FirstOrDefaultAsync();
+    if (account == null)
+        return TypedResults.BadRequest();
+
+    return TypedResults.Ok(new AccountDTO
+    {
+        id = account.id,
+        balance = account.balance
+    });
 }
 
 static async Task<Results<Ok<AccountDTO>, BadRequest>> addBalance(AccountDb db, int id, decimal amount)
